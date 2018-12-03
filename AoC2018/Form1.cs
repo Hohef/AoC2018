@@ -48,6 +48,7 @@ namespace AoC2018
         {
             problemset.Add(new sProblemSet(AoC1.Function1, null, null, null));
             problemset.Add(new sProblemSet(AoC2.Function1, null, null, AoC2.Function2));
+            problemset.Add(new sProblemSet(AoC3.Function1, null, AoC3.Function2, null));
 
             for (int i = 0; i < problemset.Count; i++)
                 lb_Runs.Items.Add(string.Format("Day {0}",i+1));
@@ -66,18 +67,9 @@ namespace AoC2018
         {
             if (lb_Runs.SelectedIndex >= 0)
             {
-                if (problemset[lb_Runs.SelectedIndex].b2I) lbl_result.Text = "Result: " + problemset[lb_Runs.SelectedIndex].Problem2I.Invoke();
+                if (problemset[lb_Runs.SelectedIndex].b2I) lbl_result2.Text = "Result: " + problemset[lb_Runs.SelectedIndex].Problem2I.Invoke();
                 else if (problemset[lb_Runs.SelectedIndex].b2S) lbl_result2.Text = "Result2: " + problemset[lb_Runs.SelectedIndex].Problem2S.Invoke();
             }
-        }
-
-        private string FunctionSNull()
-        {
-            return "";
-        }
-        private int FunctionINull()
-        {
-            return -1;
         }
     }
 }
