@@ -87,6 +87,7 @@
     <Content Include="Inputs\Input1.txt" />
     <Content Include="Inputs\Input2.txt" />
     <Content Include="Inputs\Input3.txt" />
+    <Content Include="Inputs\Input4.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

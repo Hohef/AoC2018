@@ -53,6 +53,8 @@ namespace AoC2018
 
             for (int i = 0; i < problemset.Count; i++)
                 lb_Runs.Items.Add(string.Format("Day {0}",i+1));
+
+            lb_Runs.SelectedIndex = lb_Runs.Items.Count - 1;
         }
 
         private void button1_Click(object sender, EventArgs e)
