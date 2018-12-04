@@ -48,6 +48,7 @@
     <Compile Include="AoC1.cs" />
     <Compile Include="AoC2.cs" />
     <Compile Include="Aoc3.cs" />
+    <Compile Include="AoC4.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
