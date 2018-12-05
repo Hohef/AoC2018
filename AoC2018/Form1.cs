@@ -50,6 +50,7 @@ namespace AoC2018
             problemset.Add(new sProblemSet(AoC2.Function1, null, null, AoC2.Function2));
             problemset.Add(new sProblemSet(AoC3.Function1, null, AoC3.Function2, null));
             problemset.Add(new sProblemSet(AoC4.Function1, null, AoC4.Function2, null));
+            problemset.Add(new sProblemSet(AoC5.Function1, null, AoC5.Function2, null));
 
             for (int i = 0; i < problemset.Count; i++)
                 lb_Runs.Items.Add(string.Format("Day {0}",i+1));
