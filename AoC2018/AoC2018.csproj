@@ -50,6 +50,7 @@
     <Compile Include="Aoc3.cs" />
     <Compile Include="AoC4.cs" />
     <Compile Include="AoC5.cs" />
+    <Compile Include="AoC6.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -90,6 +91,8 @@
     <Content Include="Inputs\Input3.txt" />
     <Content Include="Inputs\Input4.txt" />
     <Content Include="Inputs\Input5.txt" />
+    <Content Include="Inputs\Input6a.txt" />
+    <Content Include="Inputs\Input6.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
