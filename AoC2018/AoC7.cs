@@ -36,7 +36,7 @@ namespace AoC2018
             System.IO.StreamReader reader = new StreamReader(@"..\..\Inputs\Input7.txt");
             do
             {
-                string[] line = reader.ReadLine().Split(delim, ' ');
+                string[] line = reader.ReadLine().Split(' ');
                 int stepA = char.Parse(line[1]) - 'A';
                 int stepB = char.Parse(line[7]) - 'A';
                 bStepSeen[stepA] = true;
