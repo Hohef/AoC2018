@@ -10,14 +10,16 @@ using System.Windows.Forms;
 
 delegate int Function();
 delegate string FunctionS();
+delegate long FunctionL();
 
 namespace AoC2018
 {
     struct sProblemSet
     {
-        public bool b1I, b1S, b2I, b2S;
+        public bool b1I, b1S, b2I, b2S, b1L, b2L;
         public Function Problem1I, Problem2I;
         public FunctionS Problem1S, Problem2S;
+        public FunctionL Problem1L, Problem2L;
 
         public sProblemSet(Function func1, FunctionS func1s, Function func2, FunctionS func2s)
         {
@@ -25,10 +27,30 @@ namespace AoC2018
             Problem1S = func1s;
             Problem2I = func2;
             Problem2S = func2s;
+            Problem1L = null;
+            Problem2L = null;
             b1I = (func1 != null);
             b1S = (func1s != null);
             b2I = (func2 != null);
             b2S = (func2s != null);
+            b1L = false;
+            b2L = false;
+        }
+
+        public sProblemSet(Function func1, FunctionS func1s, FunctionL func1l, Function func2, FunctionS func2s, FunctionL func2l)
+        {
+            Problem1I = func1;
+            Problem1S = func1s;
+            Problem2I = func2;
+            Problem2S = func2s;
+            Problem1L = func1l;
+            Problem2L = func2l;
+            b1I = (func1 != null);
+            b1S = (func1s != null);
+            b2I = (func2 != null);
+            b2S = (func2s != null);
+            b1L = (func1l != null);
+            b2L = (func2l != null);
         }
     }
 
@@ -54,6 +76,7 @@ namespace AoC2018
             problemset.Add(new sProblemSet(AoC6.Function1, null, AoC6.Function2, null));
             problemset.Add(new sProblemSet(null, AoC7.Function1, AoC7.Function2, null));
             problemset.Add(new sProblemSet(AoC8.Function1, null, AoC8.Function2, null));
+            problemset.Add(new sProblemSet(AoC9.Function1, null, null, null, null, AoC9.Function2));
 
             for (int i = 0; i < problemset.Count; i++)
                 lb_Runs.Items.Add(string.Format("Day {0}",i+1));
@@ -67,6 +90,7 @@ namespace AoC2018
             {
                 if (problemset[lb_Runs.SelectedIndex].b1I) lbl_result.Text = "Result: " + problemset[lb_Runs.SelectedIndex].Problem1I.Invoke();
                 else if (problemset[lb_Runs.SelectedIndex].b1S) lbl_result.Text = "Result: " + problemset[lb_Runs.SelectedIndex].Problem1S.Invoke();
+                else if (problemset[lb_Runs.SelectedIndex].b1L) lbl_result2.Text = "Result2: " + problemset[lb_Runs.SelectedIndex].Problem1L.Invoke();
             }
         }
 
@@ -76,6 +100,7 @@ namespace AoC2018
             {
                 if (problemset[lb_Runs.SelectedIndex].b2I) lbl_result2.Text = "Result: " + problemset[lb_Runs.SelectedIndex].Problem2I.Invoke();
                 else if (problemset[lb_Runs.SelectedIndex].b2S) lbl_result2.Text = "Result2: " + problemset[lb_Runs.SelectedIndex].Problem2S.Invoke();
+                else if (problemset[lb_Runs.SelectedIndex].b2L) lbl_result2.Text = "Result2: " + problemset[lb_Runs.SelectedIndex].Problem2L.Invoke();
             }
         }
     }

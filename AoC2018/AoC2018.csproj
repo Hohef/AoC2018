@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AoC9.cs" />
     <Compile Include="AoC1.cs" />
     <Compile Include="AoC2.cs" />
     <Compile Include="Aoc3.cs" />
@@ -99,6 +100,7 @@
     <Content Include="Inputs\Input7a.txt" />
     <Content Include="Inputs\Input8.txt" />
     <Content Include="Inputs\Input8a.txt" />
+    <Content Include="Inputs\Input9.txt" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
