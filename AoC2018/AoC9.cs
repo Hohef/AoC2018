@@ -112,5 +112,133 @@ namespace AoC2018
 
             return highscore;
         }
+
+
+        static private void RevStack(ref Stack<int> stack1, ref Stack<int> stack2)
+        {
+            ref Stack<int> temp = ref stack2;
+            ref Stack<int> temp2 = ref stack1;
+
+
+            stack1 = temp;
+            stack2 = temp2;
+        }
+
+        class CStack
+        {
+            public Stack<int>[] stacks = new Stack<int>[2];
+            private int leftIdx = 0;
+            private int rightIdx = 1;
+
+            public CStack()
+            {
+                stacks[0] = new Stack<int>();
+                stacks[1] = new Stack<int>();
+            }
+
+            public int position = 0;
+            
+            public void ReverseIfNullRight()
+            {
+                if (stacks[rightIdx].Count == 0)
+                    Reverse();
+            }
+
+            public void ReverseIfNullLeft()
+            {
+                if (stacks[leftIdx].Count == 0)
+                    Reverse();
+            }
+
+            public void Reverse()
+            {
+                int tempIdx = leftIdx;
+                leftIdx = rightIdx;
+                rightIdx = tempIdx;
+
+                if (stacks[0].Count != 0)
+                    stacks[0].Reverse();
+                else
+                    stacks[1].Reverse();
+            }
+
+            public bool CheckNullRight()
+            {
+                return stacks[rightIdx].Count == 0;
+            }
+
+            public void MoveLeft()
+            {
+                stacks[leftIdx].Push(stacks[rightIdx].Pop());
+            }
+
+            public void MoveRight()
+            {
+                stacks[rightIdx].Push(stacks[leftIdx].Pop());
+            }
+
+            public void MovePositionLeft()
+            {
+                stacks[leftIdx].Push(position);
+            }
+
+            public void MovePositionRight()
+            {
+                stacks[rightIdx].Push(position);
+            }
+
+            public void SetPositionLeft()
+            {
+                position = stacks[leftIdx].Pop();
+            }
+
+            public void SetPositionRight()
+            {
+                position = stacks[rightIdx].Pop();
+            }
+        }
+
+
+        static public long Function3L()
+        {
+            CStack myStack = new CStack();
+            ReadFile();
+            //NUMMARBLES *= 100;
+            int elfIdx = -1;
+            long[] elfScore = new long[NUMELVES];
+
+            for (int marble = 1; marble < NUMMARBLES; marble++)
+            {
+                elfIdx = (elfIdx + 1) % NUMELVES;
+
+                if (marble %23 != 0)
+                {
+                    myStack.MovePositionLeft();
+                    myStack.ReverseIfNullRight();
+                    myStack.MoveLeft();
+                    myStack.position = marble;
+                }
+                else
+                {
+                    for (int i = 0; i < 7; i++)
+                    {
+                        myStack.ReverseIfNullLeft();
+                        myStack.MovePositionRight();
+                        myStack.SetPositionLeft();
+                    }
+
+                    elfScore[elfIdx] += marble;
+                    elfScore[elfIdx] += myStack.position;
+                    myStack.ReverseIfNullRight();
+                    myStack.SetPositionRight();
+                }
+            }
+
+            long highscore = 0;
+            for (int i = 0; i < NUMELVES; i++)
+                if (elfScore[i] > highscore) highscore = elfScore[i];
+
+            return highscore;
+        }
     }
 }
