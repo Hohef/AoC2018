@@ -125,9 +125,8 @@ namespace AoC2018
             {
                 stacks[0] = new Stack<int>();
                 stacks[1] = new Stack<int>();
+                stacks[0].Push(0);
             }
-
-            public int position = 0;
             
             public void ReverseIfNullRight()
             {
@@ -179,30 +178,16 @@ namespace AoC2018
                 stacks[rightIdx].Push(stacks[leftIdx].Pop());
             }
 
-            public void MovePositionLeft()
-            {
-                stacks[leftIdx].Push(position);
-            }
-
-            public void MovePositionRight()
-            {
-                stacks[rightIdx].Push(position);
-            }
-
-            public void SetPositionLeft()
-            {
-                position = stacks[leftIdx].Pop();
-            }
-
-            public void SetPositionRight()
-            {
-                position = stacks[rightIdx].Pop();
-            }
-
             public void PushLeft(int value)
             {
                 stacks[leftIdx].Push(value);
             }
+
+            public int PopLeft()
+            {
+                return stacks[leftIdx].Pop();
+            }
+
 
             public void Print()
             {
@@ -212,7 +197,7 @@ namespace AoC2018
 
                 if (max == 0)
                 {
-                    System.Diagnostics.Debug.Print("  null  " + position.ToString().PadRight(8, ' ') + "   null ");
+                    System.Diagnostics.Debug.Print("  null  " + "   null ");
                     return;
                 }
 
@@ -240,10 +225,7 @@ namespace AoC2018
                         b = (i < stacks[rightIdx].Count) ? values[1, i].ToString().PadRight(8, ' ') : "  null  ";
                     }
 
-                    if (i == 0)
-                        System.Diagnostics.Debug.Print(a + position.ToString().PadRight(8, ' ') + b);
-                    else
-                        System.Diagnostics.Debug.Print(a + "        " + b);
+                    System.Diagnostics.Debug.Print(a + "  " + b);
                 }
             }
         }
@@ -263,24 +245,23 @@ namespace AoC2018
 
                 if (marble %23 != 0)
                 {
-                    myStack.MovePositionLeft();
+                    
                     myStack.ReverseIfNullRight();
                     myStack.MoveLeft();
-                    myStack.position = marble;
+                    myStack.PushLeft(marble);
                 }
                 else
                 {
                     for (int i = 0; i < 7; i++)
                     {
                         myStack.ReverseIfNullLeft();
-                        myStack.MovePositionRight();
-                        myStack.SetPositionLeft();
+                        myStack.MoveRight();
                     }
 
                     elfScore[elfIdx] += marble;
-                    elfScore[elfIdx] += myStack.position;
+                    elfScore[elfIdx] += myStack.PopLeft();
                     myStack.ReverseIfNullRight();
-                    myStack.SetPositionRight();
+                    myStack.MoveLeft();
                 }
             }
 
