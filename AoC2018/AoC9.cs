@@ -29,7 +29,7 @@ namespace AoC2018
             List<int> board = new List<int>();
             board.Add(0);
             int boardPosition = 0;
-            for (int marble = 1; marble < NUMMARBLES; marble++)
+            for (int marble = 1; marble <= NUMMARBLES; marble++)
             {
                 elfIdx = (elfIdx + 1) % NUMELVES;
 
@@ -74,7 +74,7 @@ namespace AoC2018
             nodes[0] = board.AddLast(0);
 
             LinkedListNode<int> currentNode = nodes[0];
-            for (int marble = 1; marble < NUMMARBLES; marble++)
+            for (int marble = 1; marble <= NUMMARBLES; marble++)
             {
                 elfIdx = (elfIdx + 1) % NUMELVES;
 
@@ -114,15 +114,6 @@ namespace AoC2018
         }
 
 
-        static private void RevStack(ref Stack<int> stack1, ref Stack<int> stack2)
-        {
-            ref Stack<int> temp = ref stack2;
-            ref Stack<int> temp2 = ref stack1;
-
-
-            stack1 = temp;
-            stack2 = temp2;
-        }
 
         class CStack
         {
@@ -156,10 +147,21 @@ namespace AoC2018
                 leftIdx = rightIdx;
                 rightIdx = tempIdx;
 
+                //Need clearner way of reversing stack
                 if (stacks[0].Count != 0)
-                    stacks[0].Reverse();
+                {
+                    Stack<int> rev = new Stack<int>();
+                    while (stacks[0].Count > 0)
+                        rev.Push(stacks[0].Pop());                    
+                    stacks[0] = rev;
+                }
                 else
-                    stacks[1].Reverse();
+                {
+                    Stack<int> rev = new Stack<int>();
+                    while (stacks[1].Count > 0)
+                        rev.Push(stacks[1].Pop());
+                    stacks[1] = rev;
+                }
             }
 
             public bool CheckNullRight()
@@ -196,18 +198,66 @@ namespace AoC2018
             {
                 position = stacks[rightIdx].Pop();
             }
+
+            public void PushLeft(int value)
+            {
+                stacks[leftIdx].Push(value);
+            }
+
+            public void Print()
+            {
+                int max = Math.Max(stacks[0].Count, stacks[1].Count);
+
+                System.Diagnostics.Debug.Print("Start ---------------");
+
+                if (max == 0)
+                {
+                    System.Diagnostics.Debug.Print("  null  " + position.ToString().PadRight(8, ' ') + "   null ");
+                    return;
+                }
+
+                int[,] values = new int[2,max];
+                int idx = 0;
+
+                foreach (int i in stacks[leftIdx])
+                        values[0, idx++] = i;
+                idx = 0;
+                foreach (int i in stacks[rightIdx])
+                    values[1, idx++] = i;
+
+                for (int i = 0; i < max; i++)
+                {
+                    string a = "";
+                    string b = "";
+                    if (i != 0)
+                    {
+                        a = (i < stacks[leftIdx].Count) ? values[0, i].ToString().PadRight(8, ' ') : "        ";
+                        b = (i < stacks[rightIdx].Count) ? values[1, i].ToString().PadRight(8, ' ') : "        ";
+                    }
+                    else
+                    {
+                        a = (i < stacks[leftIdx].Count) ? values[0, i].ToString().PadRight(8, ' ') : "  null  ";
+                        b = (i < stacks[rightIdx].Count) ? values[1, i].ToString().PadRight(8, ' ') : "  null  ";
+                    }
+
+                    if (i == 0)
+                        System.Diagnostics.Debug.Print(a + position.ToString().PadRight(8, ' ') + b);
+                    else
+                        System.Diagnostics.Debug.Print(a + "        " + b);
+                }
+            }
         }
 
-
+        //Function 3L implements Jared's stack approach but in C#.
         static public long Function3L()
         {
             CStack myStack = new CStack();
             ReadFile();
-            //NUMMARBLES *= 100;
+            NUMMARBLES *= 100;
             int elfIdx = -1;
             long[] elfScore = new long[NUMELVES];
 
-            for (int marble = 1; marble < NUMMARBLES; marble++)
+            for (int marble = 1; marble <= NUMMARBLES; marble++)
             {
                 elfIdx = (elfIdx + 1) % NUMELVES;
 
