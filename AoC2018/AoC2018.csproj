@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AoC10.cs" />
     <Compile Include="AoC9.cs" />
     <Compile Include="AoC1.cs" />
     <Compile Include="AoC2.cs" />
@@ -90,6 +91,8 @@
   <ItemGroup />
   <ItemGroup>
     <Content Include="Inputs\Input1.txt" />
+    <Content Include="Inputs\Input10.txt" />
+    <Content Include="Inputs\Input10a.txt" />
     <Content Include="Inputs\Input2.txt" />
     <Content Include="Inputs\Input3.txt" />
     <Content Include="Inputs\Input4.txt" />
