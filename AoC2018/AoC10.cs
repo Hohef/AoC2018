@@ -116,10 +116,6 @@ namespace AoC2018
             int rr = Math.Min(topright, bottomright);
             int distance = Math.Abs(Math.Abs(ll) - Math.Abs(rr)) + 1;
 
-
-
-            string s = " ";
-            string srow = s.PadLeft(distance, ' ');
             char[] crow = new char[distance];
             int index;
             int internalPos;
