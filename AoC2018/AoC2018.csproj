@@ -46,6 +46,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="AoC10.cs" />
+    <Compile Include="AoC11.cs" />
     <Compile Include="AoC9.cs" />
     <Compile Include="AoC1.cs" />
     <Compile Include="AoC2.cs" />
