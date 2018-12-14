@@ -47,6 +47,7 @@
   <ItemGroup>
     <Compile Include="AoC10.cs" />
     <Compile Include="AoC11.cs" />
+    <Compile Include="AoC12.cs" />
     <Compile Include="AoC9.cs" />
     <Compile Include="AoC1.cs" />
     <Compile Include="AoC2.cs" />
@@ -94,6 +95,10 @@
     <Content Include="Inputs\Input1.txt" />
     <Content Include="Inputs\Input10.txt" />
     <Content Include="Inputs\Input10a.txt" />
+    <Content Include="Inputs\Input12.txt" />
+    <Content Include="Inputs\Input12a.txt" />
+    <Content Include="Inputs\Input12b.txt" />
+    <Content Include="Inputs\Input13.txt" />
     <Content Include="Inputs\Input2.txt" />
     <Content Include="Inputs\Input3.txt" />
     <Content Include="Inputs\Input4.txt" />
