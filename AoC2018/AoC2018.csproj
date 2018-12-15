@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="AoC13.cs" />
     <Compile Include="AoC10.cs" />
     <Compile Include="AoC11.cs" />
     <Compile Include="AoC12.cs" />
