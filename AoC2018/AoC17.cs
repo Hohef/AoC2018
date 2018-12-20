@@ -19,6 +19,7 @@ namespace AoC2018
         static int largeX, largeY;
 
         static int lowX = int.MaxValue;
+        static int minY = int.MaxValue;
 
         static void ReadFile()
         {
@@ -52,6 +53,7 @@ namespace AoC2018
                 if (scanData.x > largeX) largeX = scanData.x;
                 if (scanData.y > largeY) largeY = scanData.y;
                 if (scanData.x < lowX) lowX = scanData.x;
+                if (scanData.y < minY) minY = scanData.y;
             }
 
             largeX += 2;
@@ -185,7 +187,7 @@ namespace AoC2018
             //Count Water
             int waterCnt = 0;
             for (int i = 0; i < largeX; i++)
-                for (int j = 0; j < largeY+1; j++)
+                for (int j = minY; j < largeY+1; j++)
                     if (ground[i, j] == '~' || ground[i, j] == '|') waterCnt++;
 
             for (int j = 0; j < largeY; j++)
@@ -206,7 +208,34 @@ namespace AoC2018
 
         static public int Function2()
         {
-            return -1;
+            ReadFile();
+
+            //Fill with water.  Water starts at (500,0)
+            //Find first clay whole
+            int x = 500; int y = 1;
+            //This is starting point=
+            FillHole(x, y);
+
+            //Count Water
+            int waterCnt = 0;
+            for (int i = 0; i < largeX; i++)
+                for (int j = minY; j < largeY + 1; j++)
+                    if (ground[i, j] == '~') waterCnt++;
+
+            for (int j = 0; j < largeY; j++)
+            {
+                string s = "";
+                for (int i = lowX; i < largeX; i++)
+
+
+                    if (ground[i, j] == '\0')
+                        s += '.';
+                    else
+                        s += ground[i, j];
+                System.Diagnostics.Debug.Print(s);
+            }
+
+            return waterCnt;
         }
     }
 }
