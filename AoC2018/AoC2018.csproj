@@ -50,6 +50,8 @@
     <Compile Include="AoC11.cs" />
     <Compile Include="AoC12.cs" />
     <Compile Include="AoC14.cs" />
+    <Compile Include="AoC16.cs" />
+    <Compile Include="AoC17.cs" />
     <Compile Include="AoC9.cs" />
     <Compile Include="AoC1.cs" />
     <Compile Include="AoC2.cs" />
@@ -101,6 +103,8 @@
     <Content Include="Inputs\Input12a.txt" />
     <Content Include="Inputs\Input12b.txt" />
     <Content Include="Inputs\Input13.txt" />
+    <Content Include="Inputs\Input16.txt" />
+    <Content Include="Inputs\Input17.txt" />
     <Content Include="Inputs\Input2.txt" />
     <Content Include="Inputs\Input3.txt" />
     <Content Include="Inputs\Input4.txt" />
