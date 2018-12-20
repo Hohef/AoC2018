@@ -77,8 +77,7 @@ namespace AoC2018
         //static List<sGreenThumb> plants;
         static sGreenThumb[] pots;
         static List<int> potRules = new List<int>();
-        static int iNumInitPlants;
-        static int iInitialPots;
+        static long iInitialPots;
 
 
         private static void ReadTree()
@@ -108,8 +107,7 @@ namespace AoC2018
             reader.ReadLine();
 
             //Initialize the plants
-            iNumInitPlants = 0;
-            iInitialPots = initline.Length;
+            iInitialPots = 0;
             pots = new sGreenThumb[initline.Length + ADDITIONALPOTS];
             int potIdx = POTSTARTIDX;
             foreach (char plantstate in initline)
@@ -121,7 +119,7 @@ namespace AoC2018
                     pots[potIdx].UpdateSlot(2,true); //current slot
                     pots[potIdx+1].UpdateSlot(3, true);
                     pots[potIdx+2].UpdateSlot(4, true);
-                    iNumInitPlants++;
+                    iInitialPots += potIdx;
                 }
                 potIdx++;
             }
@@ -166,14 +164,10 @@ namespace AoC2018
             //starting at reasonable start of 4 back to cover the '....#' condition
             int startpotIdx = CYCLESTARTIDX;
             int stoppotIdx = pots.Length - POTSTARTIDX + 4;
-            int plantsgrown = iNumInitPlants;
             for (int i = 0; i < PLANTCYCLES; i++)
             {
                 for (int potIdx = startpotIdx; potIdx < stoppotIdx; potIdx++)
-                {
-                    if (pots[potIdx].ApplyRule(RuleFound(potIdx)))
-                        plantsgrown++;
-                }
+                    pots[potIdx].ApplyRule(RuleFound(potIdx));
 
                 for (int potIdx = startpotIdx; potIdx < stoppotIdx; potIdx++)
                 {  
@@ -192,7 +186,7 @@ namespace AoC2018
             }
 
             //Sum up the Pot Numbers
-            plantsgrown = 0;
+            int plantsgrown = 0;
             for (int i = 0; i < pots.Length;i++)
             {
                 if (pots[i].ContainsPlant())
@@ -215,7 +209,12 @@ namespace AoC2018
             System.Diagnostics.Debug.Print(s);
         }
 
-        public static int Function2()
+        /// <summary>
+        /// Initial idea was to find where a pattern repeats, but didn't think one
+        /// would exist.  This solution is based upon other people's ideas.
+        /// </summary>
+        /// <returns></returns>
+        public static long Function2()
         {
             bool hasplant;
             ReadFile();
@@ -223,16 +222,18 @@ namespace AoC2018
             //starting at reasonable start of 4 back to cover the '....#' condition
             int startpotIdx = CYCLESTARTIDX;
             int stoppotIdx = pots.Length - POTSTARTIDX + 4;
-            int plantsgrown = iNumInitPlants;
-            for (long i = 0; i < 50000000000; i++)
-            {
-                for (int potIdx = 0; potIdx < pots.Length; potIdx++)
-                {
-                    if (pots[potIdx].ApplyRule(RuleFound(potIdx)))
-                        plantsgrown++;
-                }
 
-                for (int potIdx = 0; potIdx < pots.Length; potIdx++)
+            long scoregen1 = iInitialPots;
+            long scoregen2 = 0;
+            long scoregen3 = 0;
+            long plantsgrown = 0;
+
+            for (int i = 0; i < 1000; i++)
+            {
+                for (int potIdx = startpotIdx; potIdx < stoppotIdx; potIdx++)
+                    pots[potIdx].ApplyRule(RuleFound(potIdx));
+
+                for (int potIdx = startpotIdx; potIdx < stoppotIdx; potIdx++)
                 {
                     if (pots[potIdx].bPending)
                     {
@@ -243,16 +244,35 @@ namespace AoC2018
                         pots[potIdx + 2].UpdateSlot(4, hasplant);
                     }
                 }
-            }
 
-            //Sum up the Pot Numbers
-            plantsgrown = 0;
-            for (int i = 0; i < pots.Length; i++)
-            {
-                if (pots[i].ContainsPlant())
+                startpotIdx--;
+                stoppotIdx++;
+
+                scoregen3 = scoregen2;
+                scoregen2 = scoregen1;
+                scoregen1 = plantsgrown;
+
+                //Sum up the Pot Numbers
+                plantsgrown = 0;
+                for (int idx = 0; idx < pots.Length; idx++)
                 {
-                    plantsgrown += (i - POTSTARTIDX);
+                    if (pots[idx].ContainsPlant())
+                    {
+                        plantsgrown += (idx - POTSTARTIDX);
+                    }
                 }
+
+                if (i > 10)
+                {
+                    //Looking for constant increase rate
+                    if (((plantsgrown - scoregen1) == (scoregen1 - scoregen2)) &&
+                        ((plantsgrown - scoregen1) == (scoregen2 - scoregen3)))
+                    {
+                        
+                        plantsgrown = plantsgrown + (plantsgrown - scoregen1)*(50000000000 - (i+1));
+                        break;
+                    }
+                }               
             }
 
             return plantsgrown;
