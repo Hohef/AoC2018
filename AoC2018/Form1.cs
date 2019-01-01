@@ -85,6 +85,7 @@ namespace AoC2018
             problemset.Add(new sProblemSet(null, null, null, null));
             problemset.Add(new sProblemSet(AoC16.Function1, null, AoC16.Function2, null));
             problemset.Add(new sProblemSet(AoC17.Function1, null, AoC17.Function2, null));
+            problemset.Add(new sProblemSet(AoC18.Function1, null, AoC18.Function2, null));
 
 
             for (int i = 0; i < problemset.Count; i++)
