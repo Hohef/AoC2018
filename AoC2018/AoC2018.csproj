@@ -53,6 +53,7 @@
     <Compile Include="AoC16.cs" />
     <Compile Include="AoC17.cs" />
     <Compile Include="AoC18.cs" />
+    <Compile Include="AoC19.cs" />
     <Compile Include="AoC9.cs" />
     <Compile Include="AoC1.cs" />
     <Compile Include="AoC2.cs" />
@@ -107,6 +108,7 @@
     <Content Include="Inputs\Input16.txt" />
     <Content Include="Inputs\Input17.txt" />
     <Content Include="Inputs\Input18.txt" />
+    <Content Include="Inputs\Input19.txt" />
     <Content Include="Inputs\Input2.txt" />
     <Content Include="Inputs\Input3.txt" />
     <Content Include="Inputs\Input4.txt" />
